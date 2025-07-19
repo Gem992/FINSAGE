@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Finsage</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome, <span id="username"></span>!</h1>
+
+    <div class="summary">
+      <p><strong>Total Income:</strong> ₹<span id="total-income">0</span></p>
+      <p><strong>Total Expenses:</strong> ₹<span id="total-expenses">0</span></p>
+      <p><strong>Net Balance:</strong> ₹<span id="net-balance">0</span></p>
+    </div>
+
+    <div class="forms">
+      <form onsubmit="return addIncome()" class="income-form">
+        <h3>Add Income</h3>
+        <input type="text" id="income-name" placeholder="Income Source" required>
+        <input type="number" id="income-amount" placeholder="Amount" required>
+        <button type="submit">Add Income</button>
+      </form>
+
+      <form onsubmit="return addExpense()" class="expense-form">
+        <h3>Add Expense</h3>
+        <input type="text" id="expense-name" placeholder="Expense Name" required>
+        <input type="number" id="expense-amount" placeholder="Amount" required>
+        <button type="submit">Add Expense</button>
+      </form>
+    </div>
+
+    <h3>Monthly Report (Current Month)</h3>
+    <ul id="monthly-report-list"></ul>
+
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
+  <script src="js/scripts.js"></script>
+</body>
+</html>
