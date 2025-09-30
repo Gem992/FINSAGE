@@ -130,12 +130,23 @@ Railway will automatically redeploy!
    - **FIXED**: Procfile now runs migrations automatically before starting
    - Check Railway logs for migration errors
 
+7. **Healthcheck Failures**
+   - **FIXED**: Added dedicated `/health/` endpoint
+   - **FIXED**: Healthcheck tests database connectivity
+   - **FIXED**: Updated railway.toml with proper healthcheck settings
+   - **FIXED**: Increased timeout to 300 seconds
+   - Healthcheck runs every 30 seconds
+
 ### Useful Commands:
 ```bash
 # Local testing with production settings
 python manage.py collectstatic
 python manage.py migrate
 DEBUG=False python manage.py runserver
+
+# Test healthcheck endpoint locally
+curl http://localhost:8000/health/
+# Should return: {"status": "healthy", "service": "finsage", "database": "connected", "timestamp": "..."}
 ```
 
 ## 💰 Cost

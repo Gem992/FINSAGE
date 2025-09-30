@@ -18,6 +18,31 @@ import seaborn as sns
 
 from .models import Income, Expense
 
+def health_check(request):
+    """Comprehensive health check endpoint for Railway"""
+    try:
+        # Test database connectivity
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+        
+        # Test if we can query the models
+        User.objects.count()  # Just check if we can access the database
+        
+        return JsonResponse({
+            'status': 'healthy',
+            'service': 'finsage',
+            'database': 'connected',
+            'timestamp': timezone.now().isoformat()
+        })
+    except Exception as e:
+        return JsonResponse({
+            'status': 'unhealthy',
+            'service': 'finsage',
+            'error': str(e),
+            'timestamp': timezone.now().isoformat()
+        }, status=500)
+
 def index(request):
     return render(request, 'index.html')
 
