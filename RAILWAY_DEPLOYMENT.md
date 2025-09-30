@@ -100,22 +100,35 @@ Railway will automatically redeploy!
 
 ### Common Issues:
 
-1. **Build Fails**
+1. **App Crashes Immediately (Python Encoding Error)**
+   - **FIXED**: Removed `runtime.txt` - let Railway auto-detect Python version
+   - **FIXED**: Updated `Procfile` with proper port binding
+   - **FIXED**: Added `railway.toml` for better configuration
+   - Redeploy after these fixes
+
+2. **Build Fails**
    - Check Railway logs for specific errors
    - Ensure all dependencies are in `requirements.txt`
+   - Verify Python version compatibility
 
-2. **Database Connection Error**
+3. **Database Connection Error**
+   - **IMPORTANT**: Add PostgreSQL database first:
+     - Go to Railway dashboard → "New" → "Database" → "PostgreSQL"
+     - Railway will auto-create `DATABASE_URL` environment variable
    - Verify PostgreSQL service is running
-   - Check `DATABASE_URL` environment variable
+   - Check `DATABASE_URL` environment variable exists
 
-3. **Static Files Not Loading**
+4. **Static Files Not Loading**
    - Run `python manage.py collectstatic` locally
    - Check `STATIC_ROOT` setting
 
-4. **App Crashes**
-   - Check Railway logs
-   - Verify `DEBUG=False` in production
-   - Check `ALLOWED_HOSTS` includes your domain
+5. **Port Binding Issues**
+   - **FIXED**: Updated Procfile to use `$PORT` environment variable
+   - Railway automatically assigns port via `$PORT` env var
+
+6. **Migration Errors**
+   - **FIXED**: Procfile now runs migrations automatically before starting
+   - Check Railway logs for migration errors
 
 ### Useful Commands:
 ```bash
